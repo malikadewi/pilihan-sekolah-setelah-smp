@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gambaran Sekolah Setelah SMP</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fce4ec;
+      color: #2c3e50;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #1a237e;
+      margin-bottom: 30px;
+    }
+    .section {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .section h2 {
+      color: #880e4f;
+      margin-bottom: 10px;
+    }
+    .quiz label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .quiz button {
+      background-color: #1a237e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #4a148c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gambaran Sekolah Setelah SMP</h1>
+
+    <div class="section">
+      <h2>1. SMA</h2>
+      <p>Sekolah Menengah Atas (SMA) menekankan pada teori dan akademik. Cocok bagi siswa yang ingin melanjutkan kuliah di perguruan tinggi.</p>
+    </div>
+
+    <div class="section">
+      <h2>2. SMK</h2>
+      <p>Sekolah Menengah Kejuruan (SMK) fokus pada keterampilan kerja. Cocok untuk siswa yang ingin cepat kerja setelah lulus. Ada banyak jurusan seperti Teknik, Tata Boga, Multimedia, dll.</p>
+    </div>
+
+    <div class="section">
+      <h2>3. MA (Madrasah Aliyah)</h2>
+      <p>Setara dengan SMA tapi dengan tambahan pelajaran agama Islam. Cocok untuk kamu yang ingin memperdalam ilmu agama dan tetap bisa lanjut kuliah.</p>
+    </div>
+
+    <div class="section">
+      <h2>4. Pendidikan Nonformal (Paket C)</h2>
+      <p>Pendidikan fleksibel seperti Paket C cocok bagi siswa dengan kondisi khusus seperti sambil bekerja. Bisa setara dengan SMA dan bisa lanjut kuliah juga.</p>
+    </div>
+
+    <div class="section quiz">
+      <h2>kuis singkat: kamu cocoknya sekolah di mana?</h2>
+      <form id="quizForm">
+        <label>1. Kamu lebih suka belajar yang...
+          <br><input type="radio" name="q1" value="sma" /> Pelajaran umum dan teori
+          <br><input type="radio" name="q1" value="smk" /> Praktik langsung dan keterampilan
+          <br><input type="radio" name="q1" value="ma" /> Agama dan umum
+          <br><input type="radio" name="q1" value="paket" /> Fleksibel dan mandiri
+        </label>
+        <br>
+        <label>2. Setelah lulus, kamu ingin...
+          <br><input type="radio" name="q2" value="sma" /> Kuliah di universitas
+          <br><input type="radio" name="q2" value="smk" /> Langsung kerja
+          <br><input type="radio" name="q2" value="ma" /> Mendalami ilmu agama
+          <br><input type="radio" name="q2" value="paket" /> Tetap belajar sambil kerja
+        </label>
+        <br>
+        <label>3. Kamu lebih suka kegiatan...
+          <br><input type="radio" name="q3" value="sma" /> Diskusi di kelas
+          <br><input type="radio" name="q3" value="smk" /> Praktik di bengkel/lab
+          <br><input type="radio" name="q3" value="ma" /> Kegiatan keagamaan
+          <br><input type="radio" name="q3" value="paket" /> Belajar mandiri dari rumah
+        </label>
+        <br>
+        <button type="button" onclick="checkResult()">lihat hasil</button>
+      </form>
+      <div class="result" id="result"></div>
+    </div>
+  </div>
+
+  <script>
+    function checkResult() {
+      const answers = ["q1", "q2", "q3"];
+      const counts = { sma: 0, smk: 0, ma: 0, paket: 0 };
+      for (let q of answers) {
+        const val = document.querySelector('input[name="' + q + '"]:checked');
+        if (val) counts[val.value]++;
+      }
+      const max = Math.max(...Object.values(counts));
+      const result = Object.keys(counts).find(key => counts[key] === max);
+
+      let message = "";
+      switch (result) {
+        case "sma":
+          message = "Kamu cocok di SMA! Fokus ke akademik dan siap lanjut kuliah.";
+          break;
+        case "smk":
+          message = "Kamu cocok di SMK! Bisa langsung kerja dengan keterampilan yang kamu pelajari.";
+          break;
+        case "ma":
+          message = "Kamu cocok di MA! Cocok buat kamu yang ingin belajar umum dan agama.";
+          break;
+        case "paket":
+          message = "Kamu cocok di Paket C atau pendidikan nonformal! Belajar fleksibel sesuai kebutuhanmu.";
+          break;
+        default:
+          message = "Lengkapi semua jawaban dulu ya!";
+      }
+      document.getElementById("result").innerText = message;
+    }
+  </script>
+</body>
+</html>
